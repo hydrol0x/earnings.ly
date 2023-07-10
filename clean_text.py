@@ -20,8 +20,8 @@ def get_keywords(text:str) -> list:
 """
 Use in order to filter down the number of words in the text, removes 'stop' words (and, or,is, etc.)
 """
-# nltk.download('punkt')
-# nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('stopwords')
 
 def remove_stopwords(text:str) -> str:
        # Set of common stopwords
