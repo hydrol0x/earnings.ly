@@ -20,26 +20,30 @@ def process_query():
     user_prompt = request.form['user_prompt']
     messages.append({'sender': 'user', 'content': user_prompt})
 
-    data = asyncio.run(get_company_ids(user_prompt))
+    try:
+        data = asyncio.run(get_company_ids(user_prompt))
 
-    valid = True
-    if data["Form"] == "10-K":
-        if data["Section"] not in prompts.ten_k_items:
-            valid = False 
-    elif data["Form"] == "8-K":
-        if data["Section"] not in prompts.eight_k_items:
-            valid = False
-    elif data["Form"] == "10-Q":
-        if data["Section"] not in prompts.ten_q_items:
-            valid = False
+        valid = True
+        if data["Form"] == "10-K":
+            if data["Section"] not in prompts.ten_k_items:
+                valid = False 
+        elif data["Form"] == "8-K":
+            if data["Section"] not in prompts.eight_k_items:
+                valid = False
+        elif data["Form"] == "10-Q":
+            if data["Section"] not in prompts.ten_q_items:
+                valid = False
 
-    if not valid:
-        data = asyncio.run(verify_sec_section(data))
+        if not valid:
+            data = asyncio.run(verify_sec_section(data))
 
-    sec_data = run_sec_API(**data)
-    sec_data_clean = remove_stopwords(sec_data[:4000])
-    answer = asyncio.run(get_palm_response(user_prompt, sec_data_clean))
-    messages.append({'sender': 'bot', 'content': answer})
+        sec_data = run_sec_API(**data)
+        sec_data_clean = remove_stopwords(sec_data[:4000])
+        answer = asyncio.run(get_palm_response(user_prompt, sec_data_clean))
+        messages.append({'sender': 'bot', 'content': answer})
+    except:
+        error_message = "Sorry, I couldn't find what you're looking for."
+        messages.append({'sender': 'bot', 'content': error_message, 'error': True})
 
     return render_template('index.html', messages=messages)
 async def get_company_ids(user_prompt)->dict:
