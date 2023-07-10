@@ -8,7 +8,10 @@ import os
 url = "https://api.sec-api.io/extractor"
 
 # Access the value of the environment variable
-api_key = os.getenv('EDGAR_KEY')
+api_key=""
+with open('EDGAR_KEY.txt', 'r') as file:
+    api_key = file.read()
+
 
 # Assign the value to the 'auth' variable
 # NOTE: if running locally better to just paste the api key variable 
