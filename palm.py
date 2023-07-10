@@ -9,7 +9,7 @@ import json  # add this line
 
 # Load the service account json file
 # Update the values in the json file with your own
-p_service_acct = r"service_account.json"
+p_service_acct = r"/etc/secrets/service_account.json"
 with open(
     p_service_acct
 ) as f:  # replace 'serviceAccount.json' with the path to your file if necessary

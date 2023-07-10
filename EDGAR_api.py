@@ -2,14 +2,13 @@
 from sec_api import QueryApi
 import requests
 import prompts
-import json
 import os
 
 # API endpoint
 url = "https://api.sec-api.io/extractor"
 
 # Access the value of the environment variable
-api_key = os.environ.get('EDGAR_KEY')
+api_key = os.getenv('EDGAR_KEY')
 
 # Assign the value to the 'auth' variable
 # NOTE: if running locally better to just paste the api key variable 
