@@ -7,10 +7,7 @@ import json
 # API endpoint
 url = "https://api.sec-api.io/extractor"
 # Read the API key from the config file
-auth=""
-with open('config.json') as config_file:
-    config = json.load(config_file)
-    auth = config['api_key']
+auth="" # ENTER AUTH KEY FOR EDGAR API
 
 ten_k_items = prompts.ten_k_items
 
