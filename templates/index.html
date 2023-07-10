@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: large;
+            margin: 0;
+            padding: 0;
+            /* background-color: #202020; */
+            height: 98vh;
+            overflow: hidden;
+            background: rgb(119,255,148);
+            background: linear-gradient(164deg, rgba(119,255,148,1) 0%, rgba(122,253,214,1) 47%, rgba(0,212,255,1) 100%); 
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 75%;
+            margin: 50px auto;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: transparent;
+            background: rgb(37,48,49);
+            background: linear-gradient(177deg, rgba(37,48,49,1) 0%, rgba(49,86,89,1) 96%); 
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-top: 0;
+        }
+
+        .chat-window {
+            height: 400px;
+            overflow-y: scroll;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #315659;
+        }
+
+        .user-message {
+            background-color: #487478;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .bot-message {
+            background-color: #386bb7;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            background-color: #386bb7;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .user-message p, .bot-message p, .error-message p {
+            margin: 0;
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .user-prompt {
+            background-color: #315659;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .user-prompt input[type="text"] {
+            width: 98%;
+            padding: 10px;
+            margin:5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #3a5e61;
+            color: #ffffff;
+        }
+
+        .user-prompt input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #19C37D;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Earnings.ly</h1>
+        <div class="chat-window">
+            {% for message in messages %}
+                {% if message['sender'] == 'user' %}
+                    <div class="user-message">
+                        <p>{{ message['content'] }}</p>
+                    </div>
+                {% else %}
+                    {% if message['error'] %}
+                        <div class="error-message">
+                            <p>{{ message['content'] }}</p>
+                        </div>
+                    {% else %}
+                        <div class="bot-message">
+                            <p>{{ message['content'] }}</p>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="user-prompt">
+            <form method="POST" action="/">
+                <input type="text" id="user_prompt" name="user_prompt" placeholder="Ask a question">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

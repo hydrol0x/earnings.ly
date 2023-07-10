@@ -1,0 +1,6 @@
+service_account.json
+*.pyc
+test/
+service_account.json
+EDGAR_KEY.json
+app.py
