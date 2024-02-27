@@ -1,6 +1,6 @@
 aiofiles==23.1.0
 google.cloud==0.34.0
-fastapi==0.99.1
+fastapi==0.109.1
 firebase-admin==6.2.0
 google-api-core==2.11.1
 google-api-python-client==2.92.0
